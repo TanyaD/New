@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Board</title>
+</head>
+<body>
+
+    <p>Welcome {{user.first_name}}!</p>
+
+    <h4>Your Wish List</h4>
+    {% if not mywish %}
+    <p>YOU DON'T HAVE WISHES YET</p>
+    {% endif %}
+    {% if mywish %}
+
+        <table class="table table-condensed">
+                
+          <thead>     
+                <tr>
+                    <th>Item</th>
+                    <th>Added by</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>  
+          </thead>
+
+          <tbody>
+                {% for x in mywish %}
+
+                    <tr>                          
+                    <td>
+                        <a href="/wish_item/{{x.id}}">{{x.item}}</a>
+                        </td>
+                        <td>
+                            <p>{{x.created_by}}</p>
+                        </td>
+                        <td>
+                            <p>{{x.created_at}}</p>
+                        </td>
+                        <td>
+                    
+                            <a href="/{{x.id}}/remove">Remove wish</a>
+                        </td>
+                    
+
+                    </tr>
+
+                {% endfor %}
+                
+            </tbody>
+
+        </table>
+    {% endif %}
+
+
+
+    <h4>Other Users' Wish List</h4>
+    <table class="table table-condensed">
+            
+      <thead>     
+            <tr>
+                <th>Item</th>
+                <th>Added by</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>  
+      </thead>
+
+      <tbody>
+            {% for y in otherwishes %}
+
+                <tr>                          
+                <td>
+                    <a href="/wish_item/{{y.id}}">{{y.item}}</a>
+                </td>
+                <td>
+                    <p>{{y.created_by}}</p>
+                </td>
+                <td>
+                    <p>{{y.created_at}}</p>
+                </td>
+                <td>
+                    <a href="/{{y.id}}/addfrom">Add to my wishlist</a>
+                </td>
+                
+
+                </tr>
+
+            {% endfor %}
+            
+        </tbody>
+
+    </table>
+
+    <br>
+    <br>
+
+    <div>
+        <a href="/wish_item/createw">Add Item</a>
+    </div>  
+    <br>
+    <br>
+    <a href="/logout">Logout<a>
+ 
+
+
+
+</body>
+</html>
